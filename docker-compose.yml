@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - 8088:80
+    links:
+      - phpfpm
+    volumes:
+      - ./srv:/var/www/srv
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./logs:/var/log/nginx/
+
+  phpfpm:
+    build: docker
+    restart: always
+    links:
+      - db
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./srv:/var/www/srv
+    working_dir: /var/www/srv
+
+  db:
+    image: postgres:13
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: laravel
+      POSTGRES_PASSWORD: laravel
+      POSTGRES_DB: laravel
+    volumes:
+      - ./lib:/var/lib/postgresql/data
