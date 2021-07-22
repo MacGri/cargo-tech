@@ -1,20 +1,11 @@
 <?php
 
-use App\Http\Controllers\ApiController;
-use Illuminate\Http\Request;
+use App\Services\Cargotech\Controllers\CargoController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group([], function () {
+    Route::get('/', [CargoController::class, 'index']);
+    Route::get('/{cargo}', [CargoController::class, 'show']);
+    Route::post('/', [CargoController::class, 'store']);
+    Route::put('/{cargo}', [CargoController::class, 'update']);
 });
