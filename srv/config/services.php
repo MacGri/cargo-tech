@@ -30,4 +30,13 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    /**
+     * Сервис api Cargo
+     */
+    'cargo' => [
+        'url'             => env('CARGO_SERVICE_URL', 'https://api.cargo.tech/v1'),
+        'connect_timeout' => env('CARGO_SERVICE_CONNECT_TIMEOUT', 5),
+        'timeout'         => env('CARGO_SERVICE_TIMEOUT', 20),
+    ],
+
 ];
