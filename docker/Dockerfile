@@ -1,4 +1,4 @@
-FROM php:8-fpm
+FROM php:8.3.2-fpm
 
 RUN apt-get update \
   && apt-get install -y \
@@ -45,4 +45,6 @@ RUN docker-php-ext-configure intl --enable-intl && \
         exif opcache \
     && docker-php-source delete
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN wget https://getcomposer.org/installer -O - -q | php -- --install-dir=/bin --filename=composer --quiet
+
+WORKDIR /srv
